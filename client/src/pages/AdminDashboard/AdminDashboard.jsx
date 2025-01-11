@@ -1,0 +1,44 @@
+import React, { useState } from 'react';
+
+function AdminDashboard() {
+    const [submissions, setSubmissions] = useState([
+        { employeeId: { name: 'John Doe' }, rating: 0 , id:0},
+        { employeeId: { name: 'Jane Smith' }, rating: 0 ,id:1}
+    ]);
+
+    const setRating = (index, rating, id) => {
+        const updatedSubmissions = [...submissions];
+        updatedSubmissions[index].rating = rating;
+        setSubmissions(updatedSubmissions);
+
+    };
+
+    return (
+        <div>
+            {submissions.map((item, index) => (
+                <div key={index}>
+                    <h5>{item.employeeId.name}</h5>
+                    {
+                        item.rating == 0 ?
+                        
+                    <select
+                        value={item.rating}
+                        onChange={(e) => setRating(index, parseInt(e.target.value), item.id)}
+                    >
+                        <option value={0}>Select Rating</option>
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                        <option value={3}>3</option>
+                        <option value={4}>4</option>
+                        <option value={5}>5</option>
+                    </select>
+                    :
+                    <p>{item.rating}</p>  
+                    }
+                </div>
+            ))}
+        </div>
+    );
+}
+
+export default AdminDashboard;

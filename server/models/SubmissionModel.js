@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const SubmissionModel = new mongoose.Schema({
-    rating:Number,
+    rating:{
+        type:Number,
+        default:0
+    },
     managerId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
