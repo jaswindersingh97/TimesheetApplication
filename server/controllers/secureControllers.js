@@ -62,11 +62,11 @@ const getSubmissions =async(req,res) =>{
     const startOfDay = new Date();
     startOfDay.setHours(0,0,0,0);
 
-    const submissions = await Submission.findOne({
+    const submissions = await Submission.find({
         managerId:userId,
         createdAt:{
             $gte:startOfDay
-        }}).populate('employeeIds')
+        }}).populate('employeeId')
     
     if(!submissions){
         return res.status(404).json({

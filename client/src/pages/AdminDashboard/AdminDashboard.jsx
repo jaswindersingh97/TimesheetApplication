@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Api from './../../Apis/Api'
 function AdminDashboard() {
-    const [submissions, setSubmissions] = useState([
-        { employeeId: { name: 'John Doe' }, rating: 0 , id:0},
-        { employeeId: { name: 'Jane Smith' }, rating: 0 ,id:1}
-    ]);
+    const [submissions, setSubmissions] = useState([]);
 
     const getSubmissions = async() =>{
         const response = await Api({
@@ -12,7 +9,9 @@ function AdminDashboard() {
             includeToken:true,
             method:'get',
         });
-        console.log(response.data)
+        console.log(response.data.submissions)
+        setSubmissions(response.data.submissions)
+        console.log(submissions)
     }
 
     useEffect(()=>{
