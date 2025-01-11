@@ -4,3 +4,4 @@ create user Model with manager and employee position,
 mark the employees to manager,
 submit the form and it gets reflected to manager dashboard
 manager rates the tasks
+need to create a page to add the employees to manager 
