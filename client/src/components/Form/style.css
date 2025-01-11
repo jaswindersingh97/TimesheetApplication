@@ -14,9 +14,7 @@
     box-sizing: border-box;
     background-color: inherit;
     border-radius: 10px;
-    border: 1px solid #FFFFFF80;
-    color: #636364;
-    ;
+    border: 1px solid black;
   }
   
   .error {

@@ -2,12 +2,10 @@ import React,{useState} from "react";
 import Form from "./../../components/Form/Form";
 import Api from './../../Apis/Api';
 import AuthLayout from './../../components/AuthLayout/AuthLayout'
-import Loading from './../../assets/Generic/Loading.gif';
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 const SignIn = () => {
   const from = location.state?.from?.pathname || `/workspace`;
-  const[loading,setLoading] = useState(false);
   const formFields = [
     {
       name: "email",
@@ -28,13 +26,11 @@ const SignIn = () => {
   ];
 
   const handleSubmit = async(data) => {
-    setLoading(true);
     const response =await Api({
       endpoint: "/login",
       method: "POST",
       data,
     });
-    setLoading(false);
     if(response.status === 200){
       localStorage.setItem("token",response.data.token);
       localStorage.setItem("id", response.data.id);
@@ -47,7 +43,7 @@ const SignIn = () => {
     <>
       <Form fields={formFields} onSubmit={handleSubmit} buttonLabel={"Log In"}/>
       <p>or</p>
-       <p>Don’t have an account? <mark><Link to={"/register"}>Register now</Link></mark></p>
+      <p>Don’t have an account? <mark><Link to={"/register"}>Register now</Link></mark></p>
     </>
     
   );

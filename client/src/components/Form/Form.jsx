@@ -37,6 +37,7 @@ const Form = ({ fields, onSubmit, buttonLabel }) => {
         const filteredValues = Object.fromEntries(
           Object.entries(formValues).filter(([_, value]) => value !== "")
         );
+        console.log(filteredValues);
         await onSubmit(filteredValues); // Wait for API handling
       } catch (error) {
         console.error("Error during submission:", error);
@@ -51,14 +52,23 @@ const Form = ({ fields, onSubmit, buttonLabel }) => {
       {fields.map((field) => (
         <div key={field.name} className="form-group">
           <label htmlFor={field.name}>{field.label || field.name}</label>
-          <input
-            type={field.type || "text"}
-            id={field.name}
-            name={field.name}
-            value={formValues[field.name]}
-            onChange={handleChange}
-            placeholder={field.placeholder}
-          />
+          {
+            field.type !== 'select' ? 
+            <input
+              type={field.type || "text"}
+              id={field.name}
+              name={field.name}
+              value={formValues[field.name]}
+              onChange={handleChange}
+              placeholder={field.placeholder}
+            />
+                                    :
+            <select value={formValues[field.name]} onChange={handleChange} name={field.name}>
+              {field.values.map((item,index) =>(
+                <option value={item} key={index} >{item}</option>
+              ) )}
+            </select>
+          }
           {errors[field.name] && (
             <span className="error">{errors[field.name]}</span>
           )}
