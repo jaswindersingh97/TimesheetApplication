@@ -24,16 +24,17 @@ app.use(requestLogger)
 const authEndpoints = require("./endpoints/authEndpoints");
 app.use(authEndpoints);
 
-const secureEndpoints = require("./endpoints/secureEndpoints");
+// const secureEndpoints = require("./endpoints/secureEndpoints");
 const authMiddleware = require("./middleware/authMiddleware");
-app.use("/secure",authMiddleware,secureEndpoints)
+
+// app.use("/secure",authMiddleware,secureEndpoints)
+
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to the server" });
 });
 
-const publicEndpoints = require('./endpoints/publicEndpoints')
-app.use("/public", publicEndpoints)
 const port = process.env.PORT || 3000;
+
 app.listen(port, () => {
     console.log("Server is running on port 3000");
 });

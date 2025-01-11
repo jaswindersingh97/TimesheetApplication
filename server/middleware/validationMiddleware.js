@@ -1,4 +1,4 @@
-const schemas = require('./../ValidationSchema/Schemas');
+const schemas = require('./../ValidationSchema/Schema');
 const validationMiddleware = (schemaType) => (req, res, next) => {
   const { body, params, query } = schemas[schemaType]; // Destructure the body and params schemas
 
