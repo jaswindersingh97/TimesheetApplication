@@ -164,6 +164,17 @@ const rateEmployeeById = async(req,res) =>{
     submission.save();
     res.status(200).json({message:"rating updated successfully"})
 }
+const searchUsers = async(req,res) =>{
+    const {name} = req.body;
+
+    const users = await User.find({name})
+
+    if(!users){
+        return res.status(404).json({message:"user not found"});
+        
+    }
+    res.status(200).json({message:"Please find the users", users});
+}
 module.exports = {
     addEmployee:asyncHandler(addEmployee),
     // getUserTasks:asyncHandler(getUserTasks),
@@ -176,4 +187,5 @@ module.exports = {
     getUserTasks:asyncHandler(getUserTasks),
     rateEmployee:asyncHandler(rateEmployee),
     rateEmployeeById:asyncHandler(rateEmployeeById),
+    searchUsers:asyncHandler(searchUsers)
 }

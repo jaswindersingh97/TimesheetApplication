@@ -12,6 +12,7 @@ const {
     submitTasks,
     rateEmployee,
     rateEmployeeById,
+    searchUsers
 } = require('./../controllers/secureControllers');
 const validationMiddleware = require('../middleware/validationMiddleware');
 
@@ -21,6 +22,7 @@ router.get("/getSubmissions",getSubmissions);
 router.get("/getUserTasks/:userId",getUserTasks)
 router.post("/rateEmployee", rateEmployee);
 router.post("/rateEmployeebyId", rateEmployeeById);
+router.get("/searchUsers", searchUsers)
 //common routes
 router.get("/getTasks",getTasks)        // get all tasks of a particular user 
 
