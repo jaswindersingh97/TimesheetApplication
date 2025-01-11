@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {Link} from 'react-router-dom';
 import Api from './../../Apis/Api'
 function AdminDashboard() {
     const [submissions, setSubmissions] = useState([]);
@@ -28,13 +29,13 @@ function AdminDashboard() {
         <div>
             {submissions.map((item, index) => (
                 <div key={index}>
-                    <h5>{item.employeeId.name}</h5>
+                    <Link to={`/adminTaskPage/${item.employeeId._id}`}></Link><h5>{item.employeeId.name}</h5>
                     {
                         item.rating == 0 ?
                         
                     <select
                         value={item.rating}
-                        onChange={(e) => setRating(index, parseInt(e.target.value), item.id)}
+                        onChange={(e) => setRating(index, parseInt(e.target.value), item._id)}
                     >
                         <option value={0}>Select Rating</option>
                         <option value={1}>1</option>

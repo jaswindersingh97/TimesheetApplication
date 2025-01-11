@@ -9,13 +9,15 @@ const {
     addTask,
     editTask,
     deleteTask,
-    submitTasks
+    submitTasks,
+    getUserTasks
 } = require('./../controllers/secureControllers');
 const validationMiddleware = require('../middleware/validationMiddleware');
 
 //manager routes
 router.post("/addEmployee",validationMiddleware("addEmployee"), addEmployee);
 router.get("/getSubmissions",getSubmissions);
+router.get("/getUserTasks/:userId",getUserTasks)
 // router.post("/rateEmployee", rateEmployee);
 
 //common routes

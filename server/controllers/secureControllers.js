@@ -124,6 +124,16 @@ const editTask  =() =>{
 const deleteTask = ()=>{
 
 }
+const getUserTasks = async() =>{
+    const {userId} = req.params;
+    
+    const startOfDay = new Date();
+    startOfDay.setHours(0,0,0,0);
+
+    const tasks = await Task.find({userId, createdAt:{
+        $gte:startOfDay }})
+    return res.status(200).json({message:"tasks fetched successfully", tasks});
+}
 module.exports = {
     addEmployee:asyncHandler(addEmployee),
     // getUserTasks:asyncHandler(getUserTasks),
@@ -132,5 +142,6 @@ module.exports = {
     getSubmissions:asyncHandler(getSubmissions),
     editTask,
     submitTasks:asyncHandler(submitTasks),
-    deleteTask
+    deleteTask,
+    getUserTasks:asyncHandler(getUserTasks)
 }

@@ -5,7 +5,7 @@ function AdminTaskPage() {
     const {userId} = useParams();
     const getTasks = async()=>{
         const response = await Api({
-            endpoint:"/secure/getTasks",
+            endpoint:`/secure/getUserTasks/${userId}`,
             includeToken:true,
             method:'get',
         })
