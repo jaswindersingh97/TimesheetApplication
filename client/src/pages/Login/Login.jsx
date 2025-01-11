@@ -34,8 +34,15 @@ const SignIn = () => {
     if(response.status === 200){
       localStorage.setItem("token",response.data.token);
       localStorage.setItem("id", response.data.id);
+      localStorage.setItem("userType",response.data.userType);
+      let nextPage;
+      if(response.data.userType =='employee'){
+        nextPage = '/taskPage'
+      }
+      else{nextPage ='/adminDashboard'
+      }
       toast.success("logged-in Succesfully");
-      window.location.href = from;
+      window.location.href = nextPage;
     }
   };
 
