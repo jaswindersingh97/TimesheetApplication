@@ -40,15 +40,17 @@ function TaskPage({isAdmin}) {
         if(isEditable){
         
         console.log(data)
-        setTasks((prevdata) =>[...prevdata,data])
         const response = await Api({
             endpoint:"/secure/addTask",
             includeToken:true,
             method:'post',
             data
         })
+        console.log(response.data)
         if(response.status ==201){
             toast.success("Task created successfully");
+            setTasks((prevdata) =>[...prevdata,response.data.response])
+        
         }}
         else{
             toast.error("you can no longer do changes")
@@ -65,6 +67,19 @@ function TaskPage({isAdmin}) {
             setIsEditable(false);
         }
       }
+      const deleteTask = async(id) =>{
+        const response = await Api({
+            endpoint:`/secure/deleteTask/${id}`,
+            method:'delete',
+            includeToken:true
+        })
+        if(response.status ==200){
+            setTasks((prevData) =>(
+                prevData.filter((item) => item._id !== id)
+            ))
+        }
+        console.log(response);
+      }
   return (
     <div className={styles.container}>
         <Form fields={formFields} onSubmit={addTask} buttonLabel={'submit'}/>
@@ -73,8 +88,8 @@ function TaskPage({isAdmin}) {
                 <div key={index}>
                     <h1>{item.name}</h1>
                     <p>{item.content}</p>
-                    <button>edit</button>
-                    <button>delete</button>
+                    {/* <button>edit</button> */}
+                    <button onClick={()=>{deleteTask(item._id)}}>delete</button>
                 </div>
             ))
         }

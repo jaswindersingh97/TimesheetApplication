@@ -121,8 +121,12 @@ const submitTasks = async(req, res) =>{
 const editTask  =() =>{
 
 }
-const deleteTask = ()=>{
+const deleteTask = async(req,res)=>{
+    const {TaskId} = req.params;
 
+    const task =await Task.findByIdAndDelete(TaskId);
+    
+    return res.status(200).json({message:"Task is deleted"});
 }
 const getUserTasks = async(req,res) =>{
     const {userId} = req.params;
@@ -168,8 +172,8 @@ module.exports = {
     getSubmissions:asyncHandler(getSubmissions),
     editTask,
     submitTasks:asyncHandler(submitTasks),
-    deleteTask,
+    deleteTask:asyncHandler(deleteTask),
     getUserTasks:asyncHandler(getUserTasks),
     rateEmployee:asyncHandler(rateEmployee),
-    rateEmployeeById:asyncHandler(rateEmployeeById)
+    rateEmployeeById:asyncHandler(rateEmployeeById),
 }

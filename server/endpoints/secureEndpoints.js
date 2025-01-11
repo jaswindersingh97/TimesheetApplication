@@ -11,7 +11,7 @@ const {
     deleteTask,
     submitTasks,
     rateEmployee,
-    rateEmployeeById
+    rateEmployeeById,
 } = require('./../controllers/secureControllers');
 const validationMiddleware = require('../middleware/validationMiddleware');
 
@@ -29,5 +29,4 @@ router.post("/addTask",addTask) // done
 router.patch("/editTask/:TaskId",editTask)  // to be done
 router.delete("/deleteTask/:TaskId",deleteTask) // to be done
 router.post("/submitTasks",submitTasks);    //done
-
 module.exports = router;
