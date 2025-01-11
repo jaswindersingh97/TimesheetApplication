@@ -24,10 +24,10 @@ app.use(requestLogger)
 const authEndpoints = require("./endpoints/authEndpoints");
 app.use(authEndpoints);
 
-// const secureEndpoints = require("./endpoints/secureEndpoints");
+const secureEndpoints = require("./endpoints/secureEndpoints");
 const authMiddleware = require("./middleware/authMiddleware");
 
-// app.use("/secure",authMiddleware,secureEndpoints)
+app.use("/secure",authMiddleware,secureEndpoints)
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to the server" });

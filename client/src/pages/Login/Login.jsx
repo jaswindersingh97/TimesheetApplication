@@ -5,7 +5,7 @@ import AuthLayout from './../../components/AuthLayout/AuthLayout'
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 const SignIn = () => {
-  const from = location.state?.from?.pathname || `/workspace`;
+  const from = location.state?.from?.pathname || `/taskpage`;
   const formFields = [
     {
       name: "email",

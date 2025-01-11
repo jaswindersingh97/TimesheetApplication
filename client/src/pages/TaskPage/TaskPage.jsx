@@ -1,8 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect} from 'react'
 import styles from './TaskPage.module.css';
 import Form from '../../components/Form/Form';
-function TaskPage() {
+import Api from './../../Apis/Api';
+import { toast } from 'react-toastify';
+function TaskPage({isAdmin}) {
     const [tasks,setTasks] = useState([]);
+    const [isEditable,setIsEditable] = useState(true);
+    const getTasks = async()=>{
+        const response = await Api({
+            endpoint:"/secure/getTasks",
+            includeToken:true,
+            method:'get',
+        })
+        console.log(response.data);
+        setTasks(response.data.tasks);
+    }
+    useEffect(()=>{
+        getTasks();
+    },[])
     const formFields = [
         {
           name: "name",
@@ -21,12 +36,34 @@ function TaskPage() {
           errorMessage: "content must be at least 6 characters long",
         },
       ];
-      const addTask = (data) =>{
+      const addTask = async(data) =>{
+        if(isEditable){
+        
         console.log(data)
         setTasks((prevdata) =>[...prevdata,data])
+        const response = await Api({
+            endpoint:"/secure/addTask",
+            includeToken:true,
+            method:'post',
+            data
+        })
+        if(response.status ==201){
+            toast.success("Task created successfully");
+        }}
+        else{
+            toast.error("you can no longer do changes")
+        }
       }
-      const submitTasks = ()=>{
-
+      const submitTasks = async()=>{
+        const response = await Api({
+            endpoint:"/secure/submitTasks",
+            includeToken:true,
+            method:'post'
+        });
+        if(response.status ==201){
+            toast.success("Data submitted to manager");
+            setIsEditable(false);
+        }
       }
   return (
     <div className={styles.container}>
@@ -36,10 +73,12 @@ function TaskPage() {
                 <div key={index}>
                     <h1>{item.name}</h1>
                     <p>{item.content}</p>
+                    <button>edit</button>
+                    <button>delete</button>
                 </div>
             ))
         }
-        <button>submit tasks</button>
+        <button onClick={submitTasks}>submit tasks</button>
     </div>
   )
 }

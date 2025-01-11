@@ -62,7 +62,7 @@ const getSubmissions =async(req,res) =>{
     const startOfDay = new Date();
     startOfDay.setHours(0,0,0,0);
 
-    const submissions = Submission.findOne({
+    const submissions = await Submission.findOne({
         managerId:userId,
         createdAt:{
             $gte:startOfDay
@@ -87,10 +87,10 @@ const getTasks = async(req,res) =>{
 
     const startOfDay = new Date();
     startOfDay.setHours(0,0,0,0);
-    const tasks = Task.find({userId, createdAt:{
+    const tasks = await Task.find({userId, createdAt:{
         $gte:startOfDay }})
 
-    return res.status(200).json({message:"tasks fetched successfully", tasks:tasks});
+    return res.status(200).json({message:"tasks fetched successfully", tasks});
 } 
 const addTask = async(req,res) =>{
     const {name,content} = req.body;
@@ -111,17 +111,26 @@ const submitTasks = async(req, res) =>{
             message:"user is not employee"
         })
     }
-    const response = await Submission.create({employeeId:userId})
+    const employee = await User.findById(userId)
+    const response = await Submission.create({employeeId:userId, managerId:employee.managerId})
     return res.status(201).json({
         message:"tasks submitted successfully, task is no loger editable", response
     });
 }
+
+const editTask  =() =>{
+
+}
+const deleteTask = ()=>{
+
+}
 module.exports = {
     addEmployee:asyncHandler(addEmployee),
-    getUserTasks:asyncHandler(getUserTasks),
-    getTask:asyncHandler(getTask),    
-    addTask,
-    getSubmissions:asyncHandler(getSubmissions)
-    // editTask,
-    // deleteTask
+    // getUserTasks:asyncHandler(getUserTasks),
+    getTasks:asyncHandler(getTasks),    
+    addTask:asyncHandler(addTask),
+    getSubmissions:asyncHandler(getSubmissions),
+    editTask,
+    submitTasks:asyncHandler(submitTasks),
+    deleteTask
 }

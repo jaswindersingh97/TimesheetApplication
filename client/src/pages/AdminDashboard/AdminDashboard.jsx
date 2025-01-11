@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import Api from './../../Apis/Api'
 function AdminDashboard() {
     const [submissions, setSubmissions] = useState([
         { employeeId: { name: 'John Doe' }, rating: 0 , id:0},
         { employeeId: { name: 'Jane Smith' }, rating: 0 ,id:1}
     ]);
 
+    const getSubmissions = async() =>{
+        const response = await Api({
+            endpoint:'/secure/getSubmissions',
+            includeToken:true,
+            method:'get',
+        });
+        console.log(response.data)
+    }
+
+    useEffect(()=>{
+        getSubmissions();
+    },[])
     const setRating = (index, rating, id) => {
         const updatedSubmissions = [...submissions];
         updatedSubmissions[index].rating = rating;

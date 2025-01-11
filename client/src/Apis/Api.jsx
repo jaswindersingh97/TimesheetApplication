@@ -31,7 +31,7 @@ const Api = async ({ endpoint, method = 'GET', data = {}, headers = {},includeTo
                 // Token is invalid or expired, handle 401 here
                 localStorage.removeItem('token'); // Remove invalid token
                 toast.error("Session expired. Please log in again.");
-                window.location.href = '/signIn';  // Redirect to login page
+                window.location.href = '/login';  // Redirect to login page
             } else {
                 // Handle other errors (e.g., 400, 404, etc.)
                 toast.error(error.response.data.message ||error.response.data.error || "An error occurred!");

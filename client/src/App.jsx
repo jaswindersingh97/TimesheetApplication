@@ -16,6 +16,8 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<RegisterPage/>}/>
         <Route path='/TaskPage' element={<TaskPage/>}/>
+        <Route path='/adminTaskPage/:userId' element={<TaskPage/>}/>
+
         <Route path='/addUsers' element={<AddUsers/>}/>
         <Route path='/AdminDashboard' element={<AdminDashboard/>}/>
       </Routes>
