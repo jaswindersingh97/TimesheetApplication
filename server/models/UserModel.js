@@ -20,14 +20,18 @@ const userSchema = new mongoose.Schema({
         select:false,
     },
     userType:{
-      required:true,
-      type:String,
-      enum:['manager', 'employee'], 
+        required:true,
+        type:String,
+        enum:['manager', 'employee'], 
     },
-    employee:[{
-      type:mongoose.Schema.Types.ObjectId,
-      ref:'User'
+    employees:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
     }],
+    managerId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    },
     createdAt: {
         type: Date,
         default: Date.now,

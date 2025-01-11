@@ -16,5 +16,10 @@ const schemas ={
             password: Joi.string().min(6).required(), 
             }),
         },
+    addEmployee:{
+        body: Joi.object({
+            employeeId: Joi.string().required()
+        })
+    }    
 };
 module.exports = schemas;
