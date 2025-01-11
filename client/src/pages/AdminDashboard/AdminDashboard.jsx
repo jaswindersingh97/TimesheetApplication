@@ -18,11 +18,19 @@ function AdminDashboard() {
     useEffect(()=>{
         getSubmissions();
     },[])
-    const setRating = (index, rating, id) => {
+    const setRating = async(index, rating, id) => {
         const updatedSubmissions = [...submissions];
         updatedSubmissions[index].rating = rating;
         setSubmissions(updatedSubmissions);
-
+        const response = await Api({endpoint:"/secure/rateEmployeebyId",
+            method:'post',
+            includeToken:true,
+            data:{
+                rating,
+                submissionId:id
+            }
+        })
+        console.log(response)
     };
 
     return (

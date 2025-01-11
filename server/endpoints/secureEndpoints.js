@@ -10,6 +10,8 @@ const {
     editTask,
     deleteTask,
     submitTasks,
+    rateEmployee,
+    rateEmployeeById
 } = require('./../controllers/secureControllers');
 const validationMiddleware = require('../middleware/validationMiddleware');
 
@@ -17,8 +19,8 @@ const validationMiddleware = require('../middleware/validationMiddleware');
 router.post("/addEmployee",validationMiddleware("addEmployee"), addEmployee);
 router.get("/getSubmissions",getSubmissions);
 router.get("/getUserTasks/:userId",getUserTasks)
-// router.post("/rateEmployee", rateEmployee);
-
+router.post("/rateEmployee", rateEmployee);
+router.post("/rateEmployeebyId", rateEmployeeById);
 //common routes
 router.get("/getTasks",getTasks)        // get all tasks of a particular user 
 

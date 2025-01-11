@@ -25,7 +25,7 @@ function AdminTaskPage() {
             <p>{item.content}</p>
         </div>
       ))}
-      <select
+      {/* <select
             // onChange={(e) => setRating(index, parseInt(e.target.value), item.id)}
                     >
                         <option value={0}>Select Rating</option>
@@ -34,7 +34,7 @@ function AdminTaskPage() {
                         <option value={3}>3</option>
                         <option value={4}>4</option>
                         <option value={5}>5</option>
-      </select>
+      </select> */}
     </div>
   )
 }

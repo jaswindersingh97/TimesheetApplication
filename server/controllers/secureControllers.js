@@ -134,6 +134,32 @@ const getUserTasks = async(req,res) =>{
         $gte:startOfDay }})
     return res.status(200).json({message:"tasks fetched successfully", tasks});
 }
+const rateEmployee = async(req,res) =>{
+
+    const {userId,userType} = req.user;
+    const {employeeId, rating} = req.body;
+    
+    if(userType == 'manager'){
+        return res.status(400).json({message:"user is not manager"});
+    }
+
+    const startOfDay = new Date();
+    const submission = await Submission.findOne({employeeId,managerId:userId, createdAt:{$gte:startOfDay}});
+
+    if(!submission){
+        return res.status(400).json({message:"No submission found"});
+    }
+    submission.rating = parseInt(rating);
+    submission.save();
+    res.status(200).json({message:"rating updated successfully"})
+}
+const rateEmployeeById = async(req,res) =>{
+    const {submissionId,rating} = req.body;
+    const submission = await Submission.findById(submissionId);
+    submission.rating = rating;
+    submission.save();
+    res.status(200).json({message:"rating updated successfully"})
+}
 module.exports = {
     addEmployee:asyncHandler(addEmployee),
     // getUserTasks:asyncHandler(getUserTasks),
@@ -143,5 +169,7 @@ module.exports = {
     editTask,
     submitTasks:asyncHandler(submitTasks),
     deleteTask,
-    getUserTasks:asyncHandler(getUserTasks)
+    getUserTasks:asyncHandler(getUserTasks),
+    rateEmployee:asyncHandler(rateEmployee),
+    rateEmployeeById:asyncHandler(rateEmployeeById)
 }
