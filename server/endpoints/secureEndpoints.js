@@ -5,6 +5,7 @@ const {
     addEmployee,
     getUserTasks,
     getTask,
+    getSubmissions,
     addTask,
     editTask,
     deleteTask
@@ -13,7 +14,7 @@ const validationMiddleware = require('../middleware/validationMiddleware');
 
 //manager routes
 router.post("/addEmployee",validationMiddleware("addEmployee"), addEmployee);
-router.get("/getUserTasks",getUserTasks);
+router.get("/getSubmissions",getSubmissions);
 router.post("/rateEmployee", rateEmployee);
 
 //common routes

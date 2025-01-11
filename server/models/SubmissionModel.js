@@ -5,10 +5,10 @@ const SubmissionModel = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
     },
-    TaskId:[{
+    employeeId:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Tasks'
-    }],
+        ref:'User'
+    },
     createdAt: {
         type: Date,
         default: Date.now,
