@@ -10,7 +10,6 @@ const {
     editTask,
     deleteTask,
     submitTasks,
-    getUserTasks
 } = require('./../controllers/secureControllers');
 const validationMiddleware = require('../middleware/validationMiddleware');
 

@@ -29,7 +29,7 @@ function AdminDashboard() {
         <div>
             {submissions.map((item, index) => (
                 <div key={index}>
-                    <Link to={`/adminTaskPage/${item.employeeId._id}`}></Link><h5>{item.employeeId.name}</h5>
+                    <Link to={`/adminTaskPage/${item.employeeId._id}`}><h5>{item.employeeId.name}</h5></Link>
                     {
                         item.rating == 0 ?
                         

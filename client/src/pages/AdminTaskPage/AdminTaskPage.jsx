@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import { useParams } from 'react-router-dom';
+import Api from './../../Apis/Api'
 function AdminTaskPage() {
     const [tasks,setTasks] = useState([]);
     const {userId} = useParams();
@@ -25,8 +26,7 @@ function AdminTaskPage() {
         </div>
       ))}
       <select
-            value={item.rating}
-            onChange={(e) => setRating(index, parseInt(e.target.value), item.id)}
+            // onChange={(e) => setRating(index, parseInt(e.target.value), item.id)}
                     >
                         <option value={0}>Select Rating</option>
                         <option value={1}>1</option>

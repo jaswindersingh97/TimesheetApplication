@@ -124,7 +124,7 @@ const editTask  =() =>{
 const deleteTask = ()=>{
 
 }
-const getUserTasks = async() =>{
+const getUserTasks = async(req,res) =>{
     const {userId} = req.params;
     
     const startOfDay = new Date();
